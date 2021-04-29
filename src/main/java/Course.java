@@ -1,5 +1,16 @@
+/**
+ * <h1>Lab6b</h1>
+ * <h2>CISC 181-052L Spring 2021</h2>
+ * <h3>University of Delaware</h3>
+ * <p>
+ * The purpose of Lab 6b is to work with arraylists,
+ * implementing pre-defined Object methods(equal,toString,compareTo),
+ * Overriding methods for polymorphism, and Implementing Comparable Interface
+ *
+ * @author London Kumar
+ * @since 2021-04-29
+ */
 import java.util.Objects;
-
 public class Course implements Comparable<Course>{
     /**
      * dept, a String that represents the department of the course
@@ -10,13 +21,13 @@ public class Course implements Comparable<Course>{
     private String dept;
     private int courseNum;
     private int sectionNum;
-    private int MAX_SIZE;
+    private int capacity;
 
-    public Course(String dept, int courseNum, int sectionNum, int MAX_SIZE){
-        this.dept = dept;
+    public Course(String dept, int courseNum, int sectionNum, int capacity){
+        this.dept = dept.toUpperCase();
         this.courseNum = courseNum;
         this.sectionNum = sectionNum;
-        this.MAX_SIZE = MAX_SIZE;
+        this.capacity = capacity;
     }
 
     /**
@@ -48,12 +59,12 @@ public class Course implements Comparable<Course>{
      * @return MAX_SIZE, size of the class
      */
     public int getCapacity(){
-        return this.MAX_SIZE;
+        return this.capacity;
     }
 
     @Override
     public String toString() {
-        return this.dept.toUpperCase() + this.courseNum + "-"+this.sectionNum;
+        return getDept() + getCourseNum() + "-"+getSectNum();
     }
 
     /**
@@ -90,46 +101,19 @@ public class Course implements Comparable<Course>{
         return isEqual;
     }
 
-    /**
-     * Overrided the compareTo to have my owne custom for this class
-     * @param o, a Course object
-     * @return 0 if it's equal, -1 if the second string is larger and not the same, and 1 if
-     * the first string is larger then the second and not equal
-     */
     @Override
-    public int compareTo(Course o) {
-        int str1 = 0;
-        int str2 = 0;
-        String holder;
-
-        for(int i = 0; i <= o.toString().length()-1; i++){
-            str2 += o.toString().charAt(i);
+    public int compareTo(Course holder) {
+        if(dept.compareTo(holder.getDept()) == 0){
+            if(courseNum == holder.getCourseNum()){
+                return sectionNum - holder.getSectNum();
+            }else{
+                return courseNum - holder.getCourseNum();
+            }
         }
-
-        for(int i = 0; i <= getDept().length()-1; i++){
-            str1 += getDept().charAt(i);
-        }
-
-        holder = Integer.toString(getSectNum());
-        System.out.println("Holder: "+holder);
-        str1 += holder.charAt(0);
-        str1 += holder.charAt(1);
-
-        holder = Integer.toString(getCourseNum());
-        System.out.println("Holder: "+holder);
-        str1 += holder.charAt(0);
-        str1 += holder.charAt(1);
-        str1 += holder.charAt(2);
-        str1 += 45;
-
-        System.out.println();
-        if(str1 > str2){
-            return 1;
-        }else if(str1 < str2){
-            return -1;
-        }
-        return 0;
+        return dept.compareTo(holder.getDept());
     }
+
+
 
 
 }

@@ -65,7 +65,7 @@ public class CourseTest {
     }
 
 
-/*
+
     @Test
     public void test_LabCourse() {
      System.out.println("Testing LabCourse");
@@ -86,7 +86,6 @@ public class CourseTest {
 
     labs = cisc220_12.getLabSessions();
     // Testing number of lab sessions
-    System.out.println(labs.length);
     assertEquals(labs.length == 4, true);
     //testing values of lab session objects
     for (int i = 0; i < labs.length; i++) {
@@ -169,6 +168,6 @@ public class CourseTest {
  // print the catalog
  UDCatalog.printCourseCatalog();
 
- }*/
+ }
 
 }
